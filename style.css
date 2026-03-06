@@ -123,10 +123,10 @@ body.dark-mode #settings-panel {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+.switch input:checked + .slider {
     background-color: #4a90d9;
 }
 
-input:checked + .slider:before {
+.switch input:checked + .slider:before {
     transform: translateX(24px);
 }

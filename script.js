@@ -87,16 +87,43 @@ const settingsOverlay = document.getElementById('settings-overlay');
 const settingsClose = document.getElementById('settings-close');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 
-settingsBtn.addEventListener('click', () => {
-    settingsOverlay.classList.remove('hidden');
-});
+const settingsPanel = document.getElementById('settings-panel');
 
-settingsClose.addEventListener('click', () => {
+function openSettings() {
+    settingsOverlay.classList.remove('hidden');
+    darkModeToggle.focus();
+}
+
+function closeSettings() {
     settingsOverlay.classList.add('hidden');
-});
+    settingsBtn.focus();
+}
+
+settingsBtn.addEventListener('click', openSettings);
+
+settingsClose.addEventListener('click', closeSettings);
 
 settingsOverlay.addEventListener('click', (e) => {
-    if (e.target === settingsOverlay) settingsOverlay.classList.add('hidden');
+    if (e.target === settingsOverlay) closeSettings();
+});
+
+settingsOverlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeSettings();
+        return;
+    }
+    if (e.key === 'Tab') {
+        const focusable = settingsPanel.querySelectorAll('input, button, [tabindex]');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
 });
 
 darkModeToggle.addEventListener('change', () => {
