@@ -8,7 +8,10 @@
 </head>
 <body>
     <div id="game">
-        <button id="mode">Switch to AI Mode</button>
+        <div class="top-bar">
+            <button id="mode">Switch to AI Mode</button>
+            <button id="settings-btn">Settings</button>
+        </div>
         <div class="board" id="board">
             <div class="cell" data-cell-index="0"></div>
             <div class="cell" data-cell-index="1"></div>
@@ -22,6 +25,20 @@
         </div>
         <div id="status"></div>
         <button id="reset">Reset Game</button>
+    </div>
+
+    <div id="settings-overlay" class="hidden">
+        <div id="settings-panel">
+            <h2>Settings</h2>
+            <div class="setting-row">
+                <label for="dark-mode-toggle">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button id="settings-close">Close</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

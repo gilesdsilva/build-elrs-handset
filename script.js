@@ -80,3 +80,32 @@ modeBtn.addEventListener('click', () => {
     modeBtn.innerText = aiMode ? 'Switch to Human Mode' : 'Switch to AI Mode';
     resetBtn.click();
 });
+
+// Settings
+const settingsBtn = document.getElementById('settings-btn');
+const settingsOverlay = document.getElementById('settings-overlay');
+const settingsClose = document.getElementById('settings-close');
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+settingsBtn.addEventListener('click', () => {
+    settingsOverlay.classList.remove('hidden');
+});
+
+settingsClose.addEventListener('click', () => {
+    settingsOverlay.classList.add('hidden');
+});
+
+settingsOverlay.addEventListener('click', (e) => {
+    if (e.target === settingsOverlay) settingsOverlay.classList.add('hidden');
+});
+
+darkModeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+    localStorage.setItem('darkMode', darkModeToggle.checked);
+});
+
+// Load saved dark mode preference
+if (localStorage.getItem('darkMode') === 'true') {
+    darkModeToggle.checked = true;
+    document.body.classList.add('dark-mode');
+}
